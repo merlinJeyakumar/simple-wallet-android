@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/statement_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/wallet_toolbar_height"
+        android:background="@color/wallet_background"
+        android:elevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationContentDescription="@string/navigate_back_description"
+        app:navigationIcon="@drawable/ic_wallet_arrow_back"
+        app:subtitle="@string/statement_period"
+        app:title="@string/statement_default_title"
+        app:titleTextAppearance="@style/TextAppearance.SimpleWallet.Title" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/statement_summary_card"
+        style="@style/Widget.SimpleWallet.Card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/wallet_screen_margin"
+        android:layout_marginTop="@dimen/wallet_space_8"
+        android:layout_marginEnd="@dimen/wallet_screen_margin"
+        android:minHeight="120dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statement_toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="120dp"
+            android:padding="@dimen/wallet_card_padding">
+
+            <TextView
+                android:id="@+id/statement_account_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.SimpleWallet.Title"
+                app:layout_constraintEnd_toStartOf="@id/statement_currency"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Everyday Account" />
+
+            <TextView
+                android:id="@+id/statement_currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_wallet_badge"
+                android:textColor="@color/wallet_text_secondary"
+                android:textSize="@dimen/wallet_text_caption"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@id/statement_account_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="USD" />
+
+            <TextView
+                android:id="@+id/statement_masked_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/wallet_space_2"
+                android:textAppearance="@style/TextAppearance.SimpleWallet.Supporting"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/statement_account_name"
+                tools:text="**** 4821" />
+
+            <TextView
+                android:id="@+id/statement_balance_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/wallet_space_16"
+                android:text="@string/balance_label"
+                android:textAppearance="@style/TextAppearance.SimpleWallet.Supporting"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/statement_masked_number" />
+
+            <TextView
+                android:id="@+id/statement_balance"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/wallet_space_2"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="1"
+                android:textColor="@color/wallet_text_primary"
+                android:textSize="@dimen/wallet_text_balance"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/statement_balance_label"
+                tools:text="USD 4,280.50" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/statement_section_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/wallet_screen_margin"
+        android:layout_marginTop="@dimen/wallet_space_16"
+        android:layout_marginEnd="@dimen/wallet_screen_margin"
+        android:text="@string/statement_section_heading"
+        android:textAppearance="@style/TextAppearance.SimpleWallet.Title"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statement_summary_card" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/statement_swipe_refresh"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/wallet_space_8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statement_section_title">
+
+        <FrameLayout
+            android:id="@+id/statement_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/statement_transactions_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:overScrollMode="ifContentScrolls"
+            android:paddingStart="@dimen/wallet_screen_margin"
+            android:paddingEnd="@dimen/wallet_screen_margin"
+            android:paddingBottom="@dimen/wallet_space_24"
+            android:scrollbars="vertical"
+            android:visibility="gone" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/statement_state_panel"
+            style="@style/Widget.SimpleWallet.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/wallet_screen_margin"
+            android:accessibilityLiveRegion="polite"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="@dimen/wallet_space_24">
+
+                <TextView
+                    android:id="@+id/statement_state_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textAppearance="@style/TextAppearance.SimpleWallet.Title" />
+
+                <TextView
+                    android:id="@+id/statement_state_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/wallet_space_8"
+                    android:gravity="center"
+                    android:textAppearance="@style/TextAppearance.SimpleWallet.Supporting" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/statement_retry_button"
+                    style="@style/Widget.SimpleWallet.PrimaryButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/wallet_space_16"
+                    android:text="@string/retry_action"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+        </FrameLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <LinearLayout
+        android:id="@+id/statement_progress_panel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:accessibilityLiveRegion="polite"
+        android:background="@color/wallet_loading_scrim"
+        android:clickable="true"
+        android:contentDescription="@string/statement_loading"
+        android:elevation="@dimen/wallet_space_8"
+        android:focusable="true"
+        android:gravity="center"
+        android:importantForAccessibility="yes"
+        android:orientation="vertical"
+        android:padding="@dimen/wallet_space_24"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ProgressBar
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:indeterminateTint="@color/wallet_primary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/wallet_space_16"
+            android:text="@string/statement_loading"
+            android:textAppearance="@style/TextAppearance.SimpleWallet.Supporting" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

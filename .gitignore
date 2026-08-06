@@ -1,0 +1,17 @@
+*.iml
+.gradle/
+.idea/
+local.properties
+build/
+**/build/
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+*.keystore
+*.jks
+*.log
+Simple-Wallet-Android-Submission.zip
+.stitch/
+gradle/gradle-daemon-jvm.properties

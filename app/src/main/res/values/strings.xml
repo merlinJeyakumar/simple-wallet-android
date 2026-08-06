@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Simple Wallet</string>
+    <string name="session_loading">Opening your wallet&#8230;</string>
+
+    <string name="login_title">Welcome back</string>
+    <string name="login_subtitle">Log in to securely view your wallet accounts and recent activity.</string>
+    <string name="login_identifier_label">Email or username</string>
+    <string name="login_password_label">Password</string>
+    <string name="login_action">Log in</string>
+    <string name="login_loading">Logging in&#8230;</string>
+    <string name="login_logo_description">Simple Wallet logo</string>
+
+    <string name="dashboard_title">My Wallet</string>
+    <string name="dashboard_accounts_heading">Your accounts</string>
+    <string name="dashboard_subtitle">Select an account to view the last 30 days.</string>
+    <string name="logout_action">Log out</string>
+    <string name="logout_loading">Logging out&#8230;</string>
+    <string name="accounts_loading">Loading your accounts&#8230;</string>
+    <string name="accounts_empty_title">No accounts yet</string>
+    <string name="accounts_empty_message">There are no wallet accounts available for this profile.</string>
+    <string name="accounts_error_title">Accounts unavailable</string>
+    <string name="accounts_error_message">We couldn\'t load your accounts. Please try again.</string>
+    <string name="retry_action">Try again</string>
+    <string name="balance_label">Available balance</string>
+    <string name="account_content_description">%1$s account, %2$s, balance %3$s. Open statement.</string>
+    <string name="account_summary_content_description">%1$s account, %2$s, balance %3$s.</string>
+    <string name="open_account_description">Open account statement</string>
+
+    <string name="statement_default_title">Account statement</string>
+    <string name="statement_period">Last 30 days</string>
+    <string name="statement_section_heading">Last 30 days</string>
+    <string name="navigate_back_description">Go back</string>
+    <string name="statement_loading">Loading recent transactions&#8230;</string>
+    <string name="statement_empty_title">No recent activity</string>
+    <string name="statement_empty_message">This account has no transactions in the last 30 days.</string>
+    <string name="statement_error_title">Statement unavailable</string>
+    <string name="statement_error_message">We couldn\'t load this statement. Please try again.</string>
+    <string name="transaction_balance_after">Balance after: %1$s</string>
+    <string name="transaction_type_credit">Credit</string>
+    <string name="transaction_type_debit">Debit</string>
+    <string name="transaction_content_description">%1$s, %2$s, %3$s, %4$s, balance after %5$s</string>
+
+    <string name="generic_error_message">Something went wrong. Please try again.</string>
+</resources>

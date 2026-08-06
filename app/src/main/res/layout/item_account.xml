@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/account_card"
+    style="@style/Widget.SimpleWallet.Card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/wallet_space_12"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    android:minHeight="@dimen/wallet_account_card_min_height">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/wallet_account_card_min_height"
+        android:padding="@dimen/wallet_card_padding">
+
+        <TextView
+            android:id="@+id/account_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.SimpleWallet.Title"
+            app:layout_constraintEnd_toStartOf="@id/account_currency"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Everyday Account" />
+
+        <TextView
+            android:id="@+id/account_currency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/wallet_space_6"
+            android:background="@drawable/bg_wallet_badge"
+            android:textColor="@color/wallet_text_secondary"
+            android:textSize="@dimen/wallet_text_caption"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@id/account_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="USD" />
+
+        <TextView
+            android:id="@+id/account_balance_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/wallet_space_16"
+            android:text="@string/balance_label"
+            android:textAppearance="@style/TextAppearance.SimpleWallet.Supporting"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/account_name" />
+
+        <TextView
+            android:id="@+id/account_balance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/wallet_space_2"
+            android:fontFamily="sans-serif-medium"
+            android:maxLines="1"
+            android:textColor="@color/wallet_text_primary"
+            android:textSize="@dimen/wallet_text_headline"
+            app:layout_constraintEnd_toStartOf="@id/account_open_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/account_balance_label"
+            tools:text="USD 4,280.50" />
+
+        <ImageView
+            android:id="@+id/account_open_icon"
+            android:layout_width="@dimen/wallet_touch_target"
+            android:layout_height="@dimen/wallet_touch_target"
+            android:contentDescription="@string/open_account_description"
+            android:padding="@dimen/wallet_space_12"
+            android:src="@drawable/ic_wallet_arrow_forward"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="wallet_space_2">2dp</dimen>
+    <dimen name="wallet_space_4">4dp</dimen>
+    <dimen name="wallet_space_6">6dp</dimen>
+    <dimen name="wallet_space_8">8dp</dimen>
+    <dimen name="wallet_space_12">12dp</dimen>
+    <dimen name="wallet_space_16">16dp</dimen>
+    <dimen name="wallet_space_24">24dp</dimen>
+    <dimen name="wallet_space_32">32dp</dimen>
+    <dimen name="wallet_radius_small">4dp</dimen>
+    <dimen name="wallet_radius_medium">8dp</dimen>
+    <dimen name="wallet_radius_large">12dp</dimen>
+    <dimen name="wallet_screen_margin">16dp</dimen>
+    <dimen name="wallet_card_padding">16dp</dimen>
+    <dimen name="wallet_touch_target">48dp</dimen>
+    <dimen name="wallet_logo_size">56dp</dimen>
+    <dimen name="wallet_account_card_min_height">112dp</dimen>
+    <dimen name="wallet_toolbar_height">64dp</dimen>
+    <dimen name="wallet_stroke_width">1dp</dimen>
+    <dimen name="wallet_text_headline">24sp</dimen>
+    <dimen name="wallet_text_title">18sp</dimen>
+    <dimen name="wallet_text_body">16sp</dimen>
+    <dimen name="wallet_text_label">14sp</dimen>
+    <dimen name="wallet_text_caption">12sp</dimen>
+    <dimen name="wallet_text_balance">28sp</dimen>
+</resources>

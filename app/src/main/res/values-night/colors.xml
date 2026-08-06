@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="wallet_primary">#B8CFF2</color>
+    <color name="wallet_on_primary">#10233D</color>
+    <color name="wallet_secondary">#9EDAD7</color>
+    <color name="wallet_background">#111820</color>
+    <color name="wallet_surface">#18212B</color>
+    <color name="wallet_text_primary">#E7EDF4</color>
+    <color name="wallet_text_secondary">#B8C3D0</color>
+    <color name="wallet_outline">#536171</color>
+    <color name="wallet_surface_variant">#25313D</color>
+    <color name="wallet_loading_scrim">#99111820</color>
+    <color name="wallet_positive">#8FD694</color>
+    <color name="wallet_error">#FFB4AB</color>
+</resources>

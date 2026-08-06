@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/dashboard_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/wallet_toolbar_height"
+        android:background="@color/wallet_background"
+        android:elevation="0dp"
+        android:paddingStart="@dimen/wallet_space_4"
+        android:paddingEnd="@dimen/wallet_space_4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/dashboard_title"
+        app:titleTextAppearance="@style/TextAppearance.SimpleWallet.Title">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dashboard_logout_button"
+            style="@style/Widget.SimpleWallet.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/wallet_touch_target"
+            android:layout_gravity="end|center_vertical"
+            android:text="@string/logout_action" />
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <TextView
+        android:id="@+id/dashboard_section_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/wallet_screen_margin"
+        android:layout_marginEnd="@dimen/wallet_screen_margin"
+        android:text="@string/dashboard_accounts_heading"
+        android:textAppearance="@style/TextAppearance.SimpleWallet.Title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dashboard_toolbar" />
+
+    <TextView
+        android:id="@+id/dashboard_subtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/wallet_screen_margin"
+        android:layout_marginTop="@dimen/wallet_space_4"
+        android:layout_marginEnd="@dimen/wallet_screen_margin"
+        android:text="@string/dashboard_subtitle"
+        android:textAppearance="@style/TextAppearance.SimpleWallet.Supporting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dashboard_section_title" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/dashboard_swipe_refresh"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/wallet_space_16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dashboard_subtitle">
+
+        <FrameLayout
+            android:id="@+id/dashboard_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/dashboard_accounts_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:contentDescription="@string/dashboard_subtitle"
+            android:overScrollMode="ifContentScrolls"
+            android:paddingStart="@dimen/wallet_screen_margin"
+            android:paddingEnd="@dimen/wallet_screen_margin"
+            android:paddingBottom="@dimen/wallet_space_24"
+            android:scrollbars="vertical"
+            android:visibility="gone" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/dashboard_state_panel"
+            style="@style/Widget.SimpleWallet.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/wallet_screen_margin"
+            android:accessibilityLiveRegion="polite"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="@dimen/wallet_space_24">
+
+                <TextView
+                    android:id="@+id/dashboard_state_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textAppearance="@style/TextAppearance.SimpleWallet.Title" />
+
+                <TextView
+                    android:id="@+id/dashboard_state_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/wallet_space_8"
+                    android:gravity="center"
+                    android:textAppearance="@style/TextAppearance.SimpleWallet.Supporting" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/dashboard_retry_button"
+                    style="@style/Widget.SimpleWallet.PrimaryButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/wallet_space_16"
+                    android:text="@string/retry_action"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+        </FrameLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <LinearLayout
+        android:id="@+id/dashboard_progress_panel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:accessibilityLiveRegion="polite"
+        android:background="@color/wallet_loading_scrim"
+        android:clickable="true"
+        android:contentDescription="@string/accounts_loading"
+        android:elevation="@dimen/wallet_space_8"
+        android:focusable="true"
+        android:gravity="center"
+        android:importantForAccessibility="yes"
+        android:orientation="vertical"
+        android:padding="@dimen/wallet_space_24"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ProgressBar
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:indeterminateTint="@color/wallet_primary" />
+
+        <TextView
+            android:id="@+id/dashboard_loading_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/wallet_space_16"
+            android:text="@string/accounts_loading"
+            android:textAppearance="@style/TextAppearance.SimpleWallet.Supporting" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
