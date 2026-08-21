@@ -15,20 +15,18 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Collections;
 
-import dev.jeyk.simplewallet.AppContainer;
+import dagger.hilt.android.AndroidEntryPoint;
 import dev.jeyk.simplewallet.R;
-import dev.jeyk.simplewallet.SimpleWalletApplication;
 import dev.jeyk.simplewallet.databinding.FragmentStatementBinding;
 import dev.jeyk.simplewallet.domain.model.AccountStatement;
 import dev.jeyk.simplewallet.domain.model.WalletAccount;
 import dev.jeyk.simplewallet.presentation.common.UiState;
 import dev.jeyk.simplewallet.presentation.common.SingleEvent;
 import dev.jeyk.simplewallet.presentation.common.WalletFormatters;
-import dev.jeyk.simplewallet.presentation.common.WalletViewModelFactory;
 import dev.jeyk.simplewallet.presentation.navigation.WalletNavigator;
 
+@AndroidEntryPoint
 public final class StatementFragment extends Fragment {
-    private static final String ARG_ACCOUNT_ID = "account_id";
 
     private FragmentStatementBinding binding;
     private StatementViewModel viewModel;
@@ -37,7 +35,7 @@ public final class StatementFragment extends Fragment {
     public static StatementFragment newInstance(String accountId) {
         StatementFragment fragment = new StatementFragment();
         Bundle arguments = new Bundle();
-        arguments.putString(ARG_ACCOUNT_ID, accountId);
+        arguments.putString(StatementViewModel.ARG_ACCOUNT_ID, accountId);
         fragment.setArguments(arguments);
         return fragment;
     }
@@ -56,20 +54,7 @@ public final class StatementFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        String accountId = requireArguments().getString(ARG_ACCOUNT_ID);
-        if (accountId == null || accountId.trim().isEmpty()) {
-            throw new IllegalStateException("Statement requires an account id");
-        }
-
-        AppContainer container = ((SimpleWalletApplication) requireActivity().getApplication())
-                .getContainer();
-        WalletViewModelFactory factory = new WalletViewModelFactory(() -> new StatementViewModel(
-                accountId,
-                container.getGetAccountStatementUseCase(),
-                container.getRequestDelay(),
-                container.getExecutorService()
-        ));
-        viewModel = new ViewModelProvider(this, factory).get(StatementViewModel.class);
+        viewModel = new ViewModelProvider(this).get(StatementViewModel.class);
 
         transactionAdapter = new TransactionAdapter();
         binding.statementTransactionsList.setLayoutManager(

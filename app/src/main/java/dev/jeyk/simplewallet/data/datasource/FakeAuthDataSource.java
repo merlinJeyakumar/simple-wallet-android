@@ -3,6 +3,8 @@ package dev.jeyk.simplewallet.data.datasource;
 import java.util.Locale;
 import java.util.Objects;
 
+import javax.inject.Inject;
+
 import dev.jeyk.simplewallet.data.exception.DataSourceException;
 import dev.jeyk.simplewallet.data.session.InMemorySessionStore;
 import dev.jeyk.simplewallet.data.session.SessionStore;
@@ -20,6 +22,7 @@ public final class FakeAuthDataSource implements AuthDataSource {
         this(new InMemorySessionStore());
     }
 
+    @Inject
     public FakeAuthDataSource(SessionStore sessionStore) {
         this.sessionStore = Objects.requireNonNull(sessionStore, "sessionStore");
     }

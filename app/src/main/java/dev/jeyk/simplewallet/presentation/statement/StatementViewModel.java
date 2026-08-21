@@ -2,19 +2,25 @@ package dev.jeyk.simplewallet.presentation.statement;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
 
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.lifecycle.HiltViewModel;
 import dev.jeyk.simplewallet.domain.model.AccountStatement;
 import dev.jeyk.simplewallet.domain.usecase.GetAccountStatementUseCase;
 import dev.jeyk.simplewallet.presentation.common.RequestDelay;
 import dev.jeyk.simplewallet.presentation.common.SingleEvent;
 import dev.jeyk.simplewallet.presentation.common.UiState;
 
+@HiltViewModel
 public final class StatementViewModel extends ViewModel {
+    static final String ARG_ACCOUNT_ID = "account_id";
     private final String accountId;
     private final GetAccountStatementUseCase getAccountStatementUseCase;
     private final RequestDelay requestDelay;
@@ -26,13 +32,21 @@ public final class StatementViewModel extends ViewModel {
     private final MutableLiveData<SingleEvent<Boolean>> refreshFailureEvents =
             new MutableLiveData<>();
 
+    @Inject
     public StatementViewModel(
-            String accountId,
+            SavedStateHandle savedStateHandle,
             GetAccountStatementUseCase getAccountStatementUseCase,
             RequestDelay requestDelay,
             ExecutorService executorService
     ) {
-        this.accountId = Objects.requireNonNull(accountId, "accountId");
+        String requiredAccountId = Objects.requireNonNull(
+                savedStateHandle.get(ARG_ACCOUNT_ID),
+                "accountId"
+        );
+        if (requiredAccountId.trim().isEmpty()) {
+            throw new IllegalArgumentException("accountId must not be blank");
+        }
+        this.accountId = requiredAccountId;
         this.getAccountStatementUseCase = Objects.requireNonNull(
                 getAccountStatementUseCase,
                 "getAccountStatementUseCase"

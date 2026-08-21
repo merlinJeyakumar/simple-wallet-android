@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.hilt.android)
 }
 
 android {
@@ -69,6 +70,8 @@ dependencies {
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.google.material)
+    implementation(libs.hilt.android)
+    annotationProcessor(libs.hilt.compiler)
 
     testImplementation(libs.junit4)
     testImplementation(libs.androidx.core.testing)

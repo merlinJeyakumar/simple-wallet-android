@@ -2,6 +2,8 @@ package dev.jeyk.simplewallet.domain.usecase;
 
 import java.util.regex.Pattern;
 
+import javax.inject.Inject;
+
 import dev.jeyk.simplewallet.domain.auth.LoginValidationResult;
 
 public final class ValidateLoginUseCase {
@@ -9,6 +11,10 @@ public final class ValidateLoginUseCase {
             "^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)+$"
     );
     private static final Pattern USERNAME_PATTERN = Pattern.compile("^[A-Za-z0-9._-]{3,64}$");
+
+    @Inject
+    public ValidateLoginUseCase() {
+    }
 
     public LoginValidationResult execute(String identifier, String password) {
         String normalizedIdentifier = identifier == null ? "" : identifier.trim();

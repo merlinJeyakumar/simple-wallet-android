@@ -8,6 +8,9 @@ import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.lifecycle.HiltViewModel;
 import dev.jeyk.simplewallet.domain.auth.AuthResult;
 import dev.jeyk.simplewallet.domain.auth.LoginValidationResult;
 import dev.jeyk.simplewallet.domain.usecase.LoginUseCase;
@@ -15,6 +18,7 @@ import dev.jeyk.simplewallet.domain.usecase.ValidateLoginUseCase;
 import dev.jeyk.simplewallet.presentation.common.RequestDelay;
 import dev.jeyk.simplewallet.presentation.common.SingleEvent;
 
+@HiltViewModel
 public final class LoginViewModel extends ViewModel {
     private final ValidateLoginUseCase validateLoginUseCase;
     private final LoginUseCase loginUseCase;
@@ -26,6 +30,7 @@ public final class LoginViewModel extends ViewModel {
     private final MutableLiveData<SingleEvent<Boolean>> authenticationEvents =
             new MutableLiveData<>();
 
+    @Inject
     public LoginViewModel(
             ValidateLoginUseCase validateLoginUseCase,
             LoginUseCase loginUseCase,

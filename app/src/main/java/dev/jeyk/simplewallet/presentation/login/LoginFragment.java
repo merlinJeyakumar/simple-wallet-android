@@ -13,14 +13,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import dev.jeyk.simplewallet.AppContainer;
+import dagger.hilt.android.AndroidEntryPoint;
 import dev.jeyk.simplewallet.R;
-import dev.jeyk.simplewallet.SimpleWalletApplication;
 import dev.jeyk.simplewallet.databinding.FragmentLoginBinding;
 import dev.jeyk.simplewallet.presentation.common.SingleEvent;
-import dev.jeyk.simplewallet.presentation.common.WalletViewModelFactory;
 import dev.jeyk.simplewallet.presentation.navigation.WalletNavigator;
 
+@AndroidEntryPoint
 public final class LoginFragment extends Fragment {
     private FragmentLoginBinding binding;
     private LoginViewModel viewModel;
@@ -39,15 +38,7 @@ public final class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        AppContainer container = ((SimpleWalletApplication) requireActivity().getApplication())
-                .getContainer();
-        WalletViewModelFactory factory = new WalletViewModelFactory(() -> new LoginViewModel(
-                container.getValidateLoginUseCase(),
-                container.getLoginUseCase(),
-                container.getRequestDelay(),
-                container.getExecutorService()
-        ));
-        viewModel = new ViewModelProvider(this, factory).get(LoginViewModel.class);
+        viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
         binding.loginButton.setOnClickListener(ignored -> submit());
         binding.loginPasswordInput.setOnEditorActionListener((ignored, actionId, event) -> {

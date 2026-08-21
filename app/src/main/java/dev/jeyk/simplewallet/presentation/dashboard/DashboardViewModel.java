@@ -9,6 +9,9 @@ import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.lifecycle.HiltViewModel;
 import dev.jeyk.simplewallet.domain.model.WalletAccount;
 import dev.jeyk.simplewallet.domain.usecase.GetAccountsUseCase;
 import dev.jeyk.simplewallet.domain.usecase.LogoutUseCase;
@@ -16,6 +19,7 @@ import dev.jeyk.simplewallet.presentation.common.RequestDelay;
 import dev.jeyk.simplewallet.presentation.common.SingleEvent;
 import dev.jeyk.simplewallet.presentation.common.UiState;
 
+@HiltViewModel
 public final class DashboardViewModel extends ViewModel {
     private final GetAccountsUseCase getAccountsUseCase;
     private final LogoutUseCase logoutUseCase;
@@ -31,6 +35,7 @@ public final class DashboardViewModel extends ViewModel {
     private final MutableLiveData<Boolean> logoutLoading = new MutableLiveData<>(false);
     private final MutableLiveData<SingleEvent<Boolean>> logoutEvents = new MutableLiveData<>();
 
+    @Inject
     public DashboardViewModel(
             GetAccountsUseCase getAccountsUseCase,
             LogoutUseCase logoutUseCase,

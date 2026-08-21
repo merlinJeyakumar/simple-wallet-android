@@ -8,10 +8,14 @@ import androidx.datastore.preferences.core.PreferencesKeys;
 import androidx.datastore.preferences.rxjava3.RxPreferenceDataStoreBuilder;
 import androidx.datastore.rxjava3.RxDataStore;
 
+import dagger.hilt.android.qualifiers.ApplicationContext;
+
 import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.util.Arrays;
 import java.util.Objects;
+
+import javax.inject.Inject;
 
 import dev.jeyk.simplewallet.data.exception.DataSourceException;
 import io.reactivex.rxjava3.core.Single;
@@ -29,7 +33,8 @@ public final class EncryptedDataStoreSessionStore implements SessionStore {
     private final RxDataStore<Preferences> dataStore;
     private final SessionCipher cipher;
 
-    public EncryptedDataStoreSessionStore(Context context) {
+    @Inject
+    public EncryptedDataStoreSessionStore(@ApplicationContext Context context) {
         this(new RxPreferenceDataStoreBuilder(
                 Objects.requireNonNull(context, "context").getApplicationContext(),
                 DATASTORE_NAME

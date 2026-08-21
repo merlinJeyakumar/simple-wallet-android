@@ -123,10 +123,11 @@
         android:padding="@dimen/wallet_space_24"
         android:visibility="gone">
 
-        <ProgressBar
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:indeterminateTint="@color/wallet_primary" />
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/login_progress_indicator"
+            style="@style/Widget.SimpleWallet.LoadingIndicator"
+            android:layout_width="@dimen/wallet_touch_target"
+            android:layout_height="@dimen/wallet_touch_target" />
 
         <TextView
             android:layout_width="wrap_content"

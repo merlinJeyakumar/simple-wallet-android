@@ -2,12 +2,15 @@ package dev.jeyk.simplewallet.domain.usecase;
 
 import java.util.Objects;
 
+import javax.inject.Inject;
+
 import dev.jeyk.simplewallet.domain.auth.AuthResult;
 import dev.jeyk.simplewallet.domain.repository.AuthRepository;
 
 public final class LoginUseCase {
     private final AuthRepository authRepository;
 
+    @Inject
     public LoginUseCase(AuthRepository authRepository) {
         this.authRepository = Objects.requireNonNull(authRepository, "authRepository");
     }

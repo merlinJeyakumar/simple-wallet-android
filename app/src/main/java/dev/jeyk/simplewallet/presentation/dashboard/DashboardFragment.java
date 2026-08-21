@@ -16,16 +16,15 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.Collections;
 import java.util.List;
 
-import dev.jeyk.simplewallet.AppContainer;
+import dagger.hilt.android.AndroidEntryPoint;
 import dev.jeyk.simplewallet.R;
-import dev.jeyk.simplewallet.SimpleWalletApplication;
 import dev.jeyk.simplewallet.databinding.FragmentDashboardBinding;
 import dev.jeyk.simplewallet.domain.model.WalletAccount;
 import dev.jeyk.simplewallet.presentation.common.SingleEvent;
 import dev.jeyk.simplewallet.presentation.common.UiState;
-import dev.jeyk.simplewallet.presentation.common.WalletViewModelFactory;
 import dev.jeyk.simplewallet.presentation.navigation.WalletNavigator;
 
+@AndroidEntryPoint
 public final class DashboardFragment extends Fragment {
     private FragmentDashboardBinding binding;
     private DashboardViewModel viewModel;
@@ -45,15 +44,7 @@ public final class DashboardFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        AppContainer container = ((SimpleWalletApplication) requireActivity().getApplication())
-                .getContainer();
-        WalletViewModelFactory factory = new WalletViewModelFactory(() -> new DashboardViewModel(
-                container.getGetAccountsUseCase(),
-                container.getLogoutUseCase(),
-                container.getRequestDelay(),
-                container.getExecutorService()
-        ));
-        viewModel = new ViewModelProvider(this, factory).get(DashboardViewModel.class);
+        viewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
 
         accountAdapter = new AccountAdapter(account ->
                 ((WalletNavigator) requireActivity()).showStatement(account.getId())

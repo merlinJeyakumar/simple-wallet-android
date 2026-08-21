@@ -10,6 +10,7 @@ import static androidx.test.espresso.action.ViewActions.swipeDown;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isEnabled;
+import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -35,6 +36,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -212,6 +214,8 @@ public final class WalletFlowTest {
         submitCredentials("demo@example.com", "password123");
         onView(withId(R.id.login_progress))
                 .check(matches(allOf(isDisplayed(), fillsParent(), hasBackgroundAlpha(255))));
+        onView(withId(R.id.login_progress_indicator))
+                .check(matches(isAssignableFrom(CircularProgressIndicator.class)));
         onView(withId(R.id.login_button)).check(matches(not(isEnabled())));
 
         onView(isRoot()).perform(waitUntil(
@@ -220,12 +224,16 @@ public final class WalletFlowTest {
         assertTrue(SystemClock.elapsedRealtime() - loginStartedAt >= 1_400L);
         onView(withId(R.id.dashboard_progress_panel))
                 .check(matches(allOf(isDisplayed(), fillsParent(), hasBackgroundAlpha(153))));
+        onView(withId(R.id.dashboard_progress_indicator))
+                .check(matches(isAssignableFrom(CircularProgressIndicator.class)));
         onView(withId(R.id.dashboard_accounts_list))
                 .perform(waitForItemCount(1, ASYNC_TIMEOUT_MILLIS))
                 .perform(clickItemAtPosition(0));
 
         onView(withId(R.id.statement_progress_panel))
                 .check(matches(allOf(isDisplayed(), fillsParent(), hasBackgroundAlpha(153))));
+        onView(withId(R.id.statement_progress_indicator))
+                .check(matches(isAssignableFrom(CircularProgressIndicator.class)));
         onView(withId(R.id.statement_transactions_list))
                 .perform(waitForItemCount(1, ASYNC_TIMEOUT_MILLIS));
         pressBack();

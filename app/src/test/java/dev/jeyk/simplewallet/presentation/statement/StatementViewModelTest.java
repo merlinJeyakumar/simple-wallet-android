@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+import androidx.lifecycle.SavedStateHandle;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -16,6 +17,7 @@ import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.util.Currency;
+import java.util.Collections;
 import java.util.List;
 
 import dev.jeyk.simplewallet.domain.model.AccountStatement;
@@ -48,7 +50,10 @@ public final class StatementViewModelTest {
         executor = new PausedExecutorService();
         requestDelay = new RecordingRequestDelay();
         viewModel = new StatementViewModel(
-                ACCOUNT_ID,
+                new SavedStateHandle(Collections.singletonMap(
+                        StatementViewModel.ARG_ACCOUNT_ID,
+                        ACCOUNT_ID
+                )),
                 new GetAccountStatementUseCase(
                         walletRepository,
                         Clock.fixed(NOW, ZoneOffset.UTC)

@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import javax.inject.Inject;
+
 import dev.jeyk.simplewallet.data.exception.DataSourceException;
 import dev.jeyk.simplewallet.domain.model.TransactionType;
 import dev.jeyk.simplewallet.domain.model.WalletAccount;
@@ -25,6 +27,7 @@ public final class InMemoryWalletDataSource implements WalletDataSource {
     private final List<WalletAccount> accounts;
     private final Map<String, List<WalletTransaction>> transactionsByAccount;
 
+    @Inject
     public InMemoryWalletDataSource(Clock clock) {
         Instant now = Objects.requireNonNull(clock, "clock").instant();
         accounts = immutableList(

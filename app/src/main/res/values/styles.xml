@@ -30,6 +30,14 @@
         <item name="strokeWidth">@dimen/wallet_stroke_width</item>
     </style>
 
+    <style name="Widget.SimpleWallet.LoadingIndicator" parent="Widget.Material3.CircularProgressIndicator">
+        <item name="android:indeterminate">true</item>
+        <item name="indicatorColor">@color/wallet_primary</item>
+        <item name="indicatorInset">0dp</item>
+        <item name="indicatorSize">@dimen/wallet_touch_target</item>
+        <item name="trackThickness">@dimen/wallet_space_4</item>
+    </style>
+
     <style name="TextAppearance.SimpleWallet.Headline" parent="TextAppearance.Material3.HeadlineSmall">
         <item name="android:textColor">@color/wallet_text_primary</item>
         <item name="android:textSize">@dimen/wallet_text_headline</item>

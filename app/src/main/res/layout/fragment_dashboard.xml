@@ -145,10 +145,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ProgressBar
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:indeterminateTint="@color/wallet_primary" />
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/dashboard_progress_indicator"
+            style="@style/Widget.SimpleWallet.LoadingIndicator"
+            android:layout_width="@dimen/wallet_touch_target"
+            android:layout_height="@dimen/wallet_touch_target" />
 
         <TextView
             android:id="@+id/dashboard_loading_text"

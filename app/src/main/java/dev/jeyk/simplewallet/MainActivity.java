@@ -15,11 +15,16 @@ import androidx.fragment.app.FragmentManager;
 
 import java.util.concurrent.ExecutorService;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
+import dev.jeyk.simplewallet.domain.usecase.IsAuthenticatedUseCase;
 import dev.jeyk.simplewallet.presentation.dashboard.DashboardFragment;
 import dev.jeyk.simplewallet.presentation.login.LoginFragment;
 import dev.jeyk.simplewallet.presentation.navigation.WalletNavigator;
 import dev.jeyk.simplewallet.presentation.statement.StatementFragment;
 
+@AndroidEntryPoint
 public final class MainActivity extends AppCompatActivity implements WalletNavigator {
     private static final String TAG_LOGIN = "login";
     private static final String TAG_DASHBOARD = "dashboard";
@@ -27,6 +32,10 @@ public final class MainActivity extends AppCompatActivity implements WalletNavig
     @Nullable
     private Boolean pendingSessionAuthenticated;
     private boolean sessionRestoreFreshLaunch;
+    @Inject
+    ExecutorService executorService;
+    @Inject
+    IsAuthenticatedUseCase isAuthenticatedUseCase;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -99,12 +108,10 @@ public final class MainActivity extends AppCompatActivity implements WalletNavig
     }
 
     private void restoreSession() {
-        AppContainer container = ((SimpleWalletApplication) getApplication()).getContainer();
-        ExecutorService executor = container.getExecutorService();
-        executor.execute(() -> {
+        executorService.execute(() -> {
             boolean authenticated = false;
             try {
-                authenticated = container.getIsAuthenticatedUseCase().execute();
+                authenticated = isAuthenticatedUseCase.execute();
             } catch (RuntimeException ignored) {
                 // A session-storage failure must fail closed to the login screen.
             }
